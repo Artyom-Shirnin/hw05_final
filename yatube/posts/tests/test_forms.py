@@ -1,3 +1,6 @@
+import shutil
+import tempfile
+
 from posts.forms import PostForm
 from posts.models import Group, Post, User
 from django.test import Client, TestCase
@@ -5,7 +8,6 @@ from django.urls import reverse
 from http import HTTPStatus
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
-import shutil, tempfile
 
 
 class PostCreateFormTests(TestCase):
