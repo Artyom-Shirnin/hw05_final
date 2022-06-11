@@ -1,4 +1,3 @@
-from pickle import NONE
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
@@ -6,7 +5,6 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Follow, Group, Post, User
 from .forms import CommentForm, PostForm
 from django.urls import reverse
-
 
 
 def page_look(post_list, request):

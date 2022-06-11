@@ -1,4 +1,6 @@
-import shutil, tempfile
+import shutil
+import tempfile
+
 from django.test import Client, TestCase
 from django.urls import reverse
 from django import forms
@@ -225,7 +227,10 @@ class FollowTests(TestCase):
 
     def test_follow(self):
         self.client_auth_follower.get(
-            reverse('posts:profile_follow',kwargs={'username':self.user_following.username})
+            reverse(
+                'posts:profile_follow',
+                kwargs={'username':self.user_following.username}
+            )
         )
         self.assertEqual(Follow.objects.all().count(), 1)
 
