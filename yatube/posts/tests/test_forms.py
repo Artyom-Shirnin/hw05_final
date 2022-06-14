@@ -3,6 +3,7 @@ import tempfile
 
 from posts.forms import PostForm
 from posts.models import Group, Post, User
+from django.core.cache import cache
 from django.test import Client, TestCase
 from django.urls import reverse
 from http import HTTPStatus
@@ -34,6 +35,7 @@ class PostCreateFormTests(TestCase):
             group=cls.group
         )
         cls.form = PostForm()
+        cache.clear()
 
     @classmethod
     # Удаление временной папки

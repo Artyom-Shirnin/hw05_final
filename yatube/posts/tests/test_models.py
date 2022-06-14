@@ -18,8 +18,27 @@ class PostModelTest(TestCase):
         )
 
     def test_models_have_correct_object_names(self):
-        """Проверяем, что у моделей корректно работает __str__."""
+        """Проверяем, что у моделей корректно работает __str__.""" 
         group = PostModelTest.group
         post = PostModelTest.post
-        self.assertEqual(str(self.group), group.title)
-        self.assertEqual(str(self.post), post.text[:15])
+        corteg = (
+            (self.group, self.group.title),
+            (self.post, self.post.text[:15]),
+        )
+        for value, expected in corteg:
+            with self.subTest(value=value):
+                self.assertEqual(str(value), expected)
+
+    def test_help_text(self):
+        """Проверяем, что корректно отображается help text."""
+        post = PostModelTest.post
+        field_help_texts = {
+            'group': 'Группа, к которой будет относиться пост',
+            'text': 'Текст нового поста',
+            'image': 'Картинка',
+        }
+        for value, expected in field_help_texts.items():
+            with self.subTest(value=value):
+                self.assertEqual(
+                    post._meta.get_field(value).help_text, expected
+                )

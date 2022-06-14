@@ -14,7 +14,10 @@ class Contact(models.Model):
 
 
 class Post(models.Model):
-    text = models.TextField()
+    text = models.TextField(
+        'text',
+        help_text='Текст нового поста'
+    )
     pub_date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(
         User,
@@ -22,14 +25,15 @@ class Post(models.Model):
         related_name='posts'
     )
     group = models.ForeignKey(
-        'Group',
+        'group',
+        help_text='Группа, к которой будет относиться пост',
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
         related_name='posts'
     )
     image = models.ImageField(
-        'Картинка',
+        help_text='Картинка',
         upload_to='posts/',
         blank=True
     )
@@ -82,3 +86,10 @@ class Follow(models.Model):
         on_delete=models.CASCADE,
         related_name="following"
     )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['author', 'user'], name='unique_following'
+            )
+        ]
