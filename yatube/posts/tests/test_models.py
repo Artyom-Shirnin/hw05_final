@@ -18,9 +18,7 @@ class PostModelTest(TestCase):
         )
 
     def test_models_have_correct_object_names(self):
-        """Проверяем, что у моделей корректно работает __str__.""" 
-        group = PostModelTest.group
-        post = PostModelTest.post
+        """Проверяем, что у моделей корректно работает __str__."""
         corteg = (
             (self.group, self.group.title),
             (self.post, self.post.text[:15]),
