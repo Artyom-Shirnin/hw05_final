@@ -13,7 +13,7 @@
       <a href="{% url 'posts:profile' post.author.username %}">все посты пользователя</a>
     </li>
     <li>
-      Дата публикации: {{ post.pub_date|date:"d E Y" }}
+      Дата публикации: {{ post.created|date:"d E Y" }}
     </li>
   </ul>
   {% load thumbnail %}

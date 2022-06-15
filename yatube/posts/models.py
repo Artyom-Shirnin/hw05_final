@@ -1,3 +1,4 @@
+from core.models import CreatedModel
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -13,12 +14,11 @@ class Contact(models.Model):
     is_answered = models.BooleanField(default=False)
 
 
-class Post(models.Model):
+class Post(CreatedModel):
     text = models.TextField(
         'text',
         help_text='Текст нового поста'
     )
-    pub_date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -42,7 +42,7 @@ class Post(models.Model):
         return self.text[:15]
 
     class Meta:
-        ordering = ('pub_date',)
+        ordering = ('created',)
 
 
 class Group(models.Model):
@@ -54,7 +54,7 @@ class Group(models.Model):
         return self.title
 
 
-class Comment(models.Model):
+class Comment(CreatedModel):
     post = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,
@@ -68,10 +68,6 @@ class Comment(models.Model):
     text = models.TextField(
         'Текст комментария',
         help_text='Введите текст комментария'
-    )
-    created = models.DateTimeField(
-        'Дата комментария',
-        auto_now_add=True
     )
 
 
