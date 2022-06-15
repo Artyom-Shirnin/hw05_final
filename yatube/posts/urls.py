@@ -26,5 +26,5 @@ urlpatterns = [
         views.profile_unfollow,
         name='profile_unfollow'
     ),
-        path('', views.index, name='index'),
+    path('', views.index, name='index'),
 ]
